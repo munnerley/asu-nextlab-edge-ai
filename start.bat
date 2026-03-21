@@ -3,7 +3,7 @@ echo Starting ASU Next Lab Edge AI Demo...
 echo.
 
 echo [1/3] Starting Ollama...
-start "" "C:\Users\dan\AppData\Local\Programs\Ollama\ollama.exe" serve
+start "" "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
 timeout /t 3 /nobreak >nul
 
 echo [2/3] Starting Open WebUI...
@@ -20,7 +20,7 @@ docker start open-webui 2>nul || (
 timeout /t 5 /nobreak >nul
 
 echo [3/3] Starting Frontend...
-start "" cmd /k "cd /d %~dp0 && serve dist -p 8080"
+start "" cmd /k "cd /d "%~dp0" && serve dist -p 8080"
 timeout /t 2 /nobreak >nul
 
 echo.
