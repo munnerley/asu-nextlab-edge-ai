@@ -20,12 +20,12 @@ docker start open-webui 2>nul || (
 timeout /t 5 /nobreak >nul
 
 echo [3/3] Starting Frontend...
-start "" cmd /k "cd /d "%~dp0" && serve dist -p 8080"
+start "" cmd /k "cd /d "%~dp0" && serve dist -p 8888"
 timeout /t 2 /nobreak >nul
 
 echo.
 echo All services running:
-echo   Frontend   ->  http://localhost:8080
+echo   Frontend   ->  http://localhost:8888
 echo   Open WebUI ->  http://localhost:3000
 echo.
 start http://localhost:8080
