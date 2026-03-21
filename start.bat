@@ -28,5 +28,5 @@ echo All services running:
 echo   Frontend   ->  http://localhost:8888
 echo   Open WebUI ->  http://localhost:3000
 echo.
-start http://localhost:8080
+start http://localhost:8888
 pause
