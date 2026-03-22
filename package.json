@@ -1,0 +1,24 @@
+{
+  "name": "asu-nextlab-edge-ai",
+  "version": "1.0.0",
+  "description": "A self-contained local AI demo kit running entirely offline.",
+  "main": "proxy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/munnerley/asu-nextlab-edge-ai.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/munnerley/asu-nextlab-edge-ai/issues"
+  },
+  "homepage": "https://github.com/munnerley/asu-nextlab-edge-ai#readme",
+  "dependencies": {
+    "http-proxy": "^1.18.1"
+  }
+}
