@@ -10,10 +10,11 @@ for /f "usebackq tokens=*" %%a in ("version.txt") do set LOCAL_VERSION=%%a
 echo Current version: v%LOCAL_VERSION%
 
 echo Checking for updates...
-curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o "%~dp0version_remote.txt"
+curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o "%TEMP%\version_remote.txt"
 timeout /t 1 /nobreak >nul
-if exist "%~dp0version_remote.txt" (
-    set /p REMOTE_VERSION=<"%~dp0version_remote.txt"
+if exist "%TEMP%\version_remote.txt" (
+    set /p REMOTE_VERSION=<"%TEMP%\version_remote.txt"
+    del "%TEMP%\version_remote.txt"
     del "%~dp0version_remote.txt"
     del version_remote.txt
     echo DEBUG local=[%LOCAL_VERSION%] remote=[%REMOTE_VERSION%]
