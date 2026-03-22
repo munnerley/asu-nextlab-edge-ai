@@ -62,7 +62,8 @@ if %errorlevel% neq 0 (
 ) else (
     echo [OK] serve already installed
 )
-echo CHECKPOINT 5 - serve done
+echo Press any key to continue setup...
+pause >nul
 REM Install Node dependencies
 echo Installing Node dependencies...
 npm install >nul 2>&1
