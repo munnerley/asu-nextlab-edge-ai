@@ -38,5 +38,8 @@ git push origin v%NEW_VERSION%
 
 echo.
 echo Done - v%NEW_VERSION% exported, tagged and pushed to GitHub.
+echo.
+echo NOTE: GitHub cache takes 2-3 minutes to update.
+echo Wait a few minutes before testing the version check.
 echo Recipients will be prompted to update on next start.bat launch.
 pause
