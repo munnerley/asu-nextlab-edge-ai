@@ -11,7 +11,7 @@ proxy.on('error', function(err, req, res) {
 });
 
 proxy.on('proxyReq', function(proxyReq, req, res, options) {
-    proxyReq.setHeader('X-User-Email', 'demouser@nextlab.asu.edu');
+    proxyReq.setHeader('X-User-Email', 'demo-user@asu.edu');
 });
 
 const server = http.createServer((req, res) => {
