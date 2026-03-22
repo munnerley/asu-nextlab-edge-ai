@@ -21,9 +21,10 @@ set /p UPDATE="Would you like to update now? (Y/N): "
 if /i "%UPDATE%"=="Y" (
     echo Updating...
     git pull
-    echo Update complete - please run start.bat again.
-    pause
-    exit
+    echo Update complete - relaunching...
+timeout /t 2 /nobreak >nul
+call start.bat
+exit
 )
 :skipupdate) else (
     echo You are on the latest version.
