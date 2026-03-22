@@ -44,7 +44,18 @@ timeout /t 20 /nobreak >nul
 
 echo [1/4] Starting Ollama...
 set OLLAMA_HOST=0.0.0.0
-start "" /min "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
+if exist "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" (
+    start "" /min "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
+) else if exist "C:\Program Files\Ollama\ollama.exe" (
+    start "" /min "C:\Program Files\Ollama\ollama.exe" serve
+) else (
+    where ollama >nul 2>&1
+    if %errorlevel% equ 0 (
+        start "" /min ollama serve
+    ) else (
+        echo WARNING: Ollama not found - please install from https://ollama.com/download
+    )
+)
 timeout /t 5 /nobreak >nul
 
 echo [2/4] Starting Open WebUI...

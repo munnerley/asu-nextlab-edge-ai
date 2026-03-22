@@ -39,10 +39,16 @@ ollama --version >nul 2>&1
 if %errorlevel% neq 0 (
     echo [Installing] Ollama...
     winget install --id Ollama.Ollama -e --source winget --silent
+    echo [OK] Ollama installed - you may need to restart your computer
 ) else (
-    echo [OK] Ollama already installed
+    where ollama >nul 2>&1
+    if %errorlevel% neq 0 (
+        echo [Installing] Ollama not in PATH - reinstalling...
+        winget install --id Ollama.Ollama -e --source winget --silent --force
+    ) else (
+        echo [OK] Ollama already installed
+    )
 )
-
 REM Install serve globally
 echo.
 echo Installing serve...
