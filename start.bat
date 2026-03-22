@@ -13,14 +13,22 @@ if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
     echo.
     echo New version available: v%REMOTE_VERSION%
     echo.
-    set /p UPDATE="Would you like to update now? (Y/N): "
-    if /i "%UPDATE%"=="Y" (
-        echo Updating...
-        git pull
-        echo Re-run start.bat to launch with the new version.
-        pause
-        exit
-    )
+  set /p UPDATE="Would you like to update now? (Y/N): "
+echo You entered: %UPDATE%
+if /i "%UPDATE%"=="Y" goto :doupdate
+if /i "%UPDATE%"=="y" goto :doupdate
+goto :skipupdate
+
+:doupdate
+echo Updating...
+git pull
+echo.
+echo Update complete - restarting...
+pause
+start.bat
+exit
+
+:skipupdate
 ) else (
     echo You are on the latest version.
 )
