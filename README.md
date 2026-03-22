@@ -80,10 +80,10 @@ Recipients will be prompted to update on their next `start.bat` launch.
 
 Double-click `stop.bat`
 
-## Version history
-
 | Version | Notes |
 |---------|-------|
-| v1.0.2  | Version checking, auto-update, ASU Student Wellbeing model |
+| v1.0.4  | Improved setup - Docker autostart, Ollama path detection |
+| v1.0.3  | Version management, export-config with version bump |
+| v1.0.2  | Version checking, auto-update on startup |
 | v1.0.1  | Admin portal, auto-login proxy |
 | v1.0.0  | Initial release |
