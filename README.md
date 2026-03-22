@@ -7,6 +7,7 @@ A self-contained local AI demo kit running entirely offline.
 - Open WebUI (served via Docker) with pre-configured demo accounts
 - Ollama (local AI models)
 - Auto-login proxy for seamless demo experience
+- Version checking and auto-update on startup
 
 ## First-time setup
 
@@ -33,6 +34,8 @@ A self-contained local AI demo kit running entirely offline.
 
 Double-click `start.bat`
 
+On startup it will automatically check for updates and prompt you if a new version is available.
+
 ## Services
 
 | Service       | URL                    | Access                          |
@@ -56,15 +59,31 @@ Any changes made in Admin WebUI are instantly reflected in the Demo WebUI.
 
 ## Getting updates
 
-Double-click `update.bat`, then `start.bat`.
+Double-click `start.bat` — it checks for updates automatically on every launch.
 
-## Pushing config updates (Next Lab staff only)
+Or manually pull latest:
+```bash
+git pull
+```
 
-After making changes in Admin WebUI, double-click `export-config.bat`.
+## Releasing updates (Next Lab staff only)
 
-This exports the Open WebUI config and pushes it to GitHub.
-Recipients run `update.bat` to get the latest.
+After making changes in Admin WebUI or the frontend:
+
+1. Double-click `export-config.bat`
+2. Enter the new version number when prompted
+3. Wait 2-3 minutes for GitHub cache to clear before testing
+
+Recipients will be prompted to update on their next `start.bat` launch.
 
 ## Shutting down
 
 Double-click `stop.bat`
+
+## Version history
+
+| Version | Notes |
+|---------|-------|
+| v1.0.2  | Version checking, auto-update, ASU Student Wellbeing model |
+| v1.0.1  | Admin portal, auto-login proxy |
+| v1.0.0  | Initial release |
