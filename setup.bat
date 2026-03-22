@@ -80,8 +80,13 @@ if exist "C:\Program Files\Docker\Docker\Docker Desktop.exe" (
 REM Pull AI model
 echo.
 echo Checking AI model...
-ollama list 2>nul | findstr "qwen2.5:7b" >nul
-if %errorlevel% equ 0 (
+where ollama >nul 2>&1
+if %errorlevel% neq 0 (
+    echo WARNING: Ollama not in PATH - skipping model download.
+    echo Please restart your computer then run setup.bat again to download the model.
+    goto :setupcomplete
+)
+ollama list 2>nul | findstr "qwen2.5:7b" >nulif %errorlevel% equ 0 (
     echo [OK] Model already downloaded
 ) else (
     echo Pulling AI model (this may take a while - 4.7GB download^)...
@@ -93,7 +98,7 @@ if %errorlevel% equ 0 (
         echo [OK] Model ready
     )
 )
-
+:setupcomplete
 echo.
 echo ========================================
 echo Setup complete!
