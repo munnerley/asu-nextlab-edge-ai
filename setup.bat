@@ -56,7 +56,7 @@ echo CHECKPOINT 4 - Ollama done
 REM Install serve globally
 echo.
 echo Installing serve...
-npm install -g serve >nul 2>&1
+npm install -g serve
 echo [OK] serve installed
 echo CHECKPOINT 5 - serve done
 
