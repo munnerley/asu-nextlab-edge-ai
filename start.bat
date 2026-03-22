@@ -1,15 +1,50 @@
 @echo off
-echo Starting ASU Next Lab Edge AI Demo...
+echo ASU Next Lab Edge AI Demo
+echo ========================================
+
+REM Version check
+set LOCAL_VERSION=
+set REMOTE_VERSION=
+
+for /f "tokens=*" %%a in (version.txt) do set LOCAL_VERSION=%%a
+echo Current version: v%LOCAL_VERSION%
+
+echo Checking for updates...
+curl -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o version_remote.txt 2>nul
+if exist version_remote.txt (
+    for /f "tokens=*" %%a in (version_remote.txt) do set REMOTE_VERSION=%%a
+    del version_remote.txt
+    if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
+        echo.
+        echo New version available: v%REMOTE_VERSION%
+        echo.
+        set /p UPDATE="Would you like to update now? (Y/N): "
+        if /i "%UPDATE%"=="Y" (
+            echo Updating...
+            git pull
+            echo Re-run start.bat to launch with the new version.
+            pause
+            exit
+        )
+    ) else (
+        echo You are on the latest version. 
+    )
+) else (
+    echo Could not check for updates - running offline.
+)
+
 echo.
+echo ========================================
+echo.
+
+echo Clearing ports if in use...
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8888') do taskkill /PID %%a /F >nul 2>&1
+for /f "tokens=5" %%a in ('netstat -ano ^| findstr :3000') do taskkill /PID %%a /F >nul 2>&1
 
 echo [0/4] Starting Docker Desktop...
 start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
 echo Waiting for Docker to be ready...
 timeout /t 20 /nobreak >nul
-
-echo Clearing ports if in use...
-for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8888') do taskkill /PID %%a /F >nul 2>&1
-for /f "tokens=5" %%a in ('netstat -ano ^| findstr :3000') do taskkill /PID %%a /F >nul 2>&1
 
 echo [1/4] Starting Ollama...
 set OLLAMA_HOST=0.0.0.0
@@ -28,7 +63,7 @@ if %errorlevel% neq 0 (
 ) else (
     docker start open-webui-admin 2>nul
 )
-timeout /t 5 /nobreak >nul
+timeout /t 10 /nobreak >nul
 
 echo [3/4] Starting Frontend...
 set DEMODIR=%~dp0
@@ -40,11 +75,13 @@ echo [4/4] Starting Demo Proxy...
 timeout /t 10 /nobreak >nul
 start "" cmd /c "node "%DEMODIR%\proxy.js""
 timeout /t 2 /nobreak >nul
+
 echo.
 echo All services running:
 echo   Frontend      ->  http://localhost:8888
 echo   Demo WebUI    ->  http://localhost:3000  (auto-login as demouser)
 echo   Admin WebUI   ->  http://localhost:3001  (admin login required)
+echo   Version       ->  v%LOCAL_VERSION%
 echo.
 start http://localhost:8888
 pause
