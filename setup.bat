@@ -58,12 +58,11 @@ echo.
 echo Installing serve...
 serve --version >nul 2>&1
 if %errorlevel% neq 0 (
-    cmd /c "npm install -g serve"
+    call npm install -g serve
 ) else (
     echo [OK] serve already installed
 )
 echo CHECKPOINT 5 - serve done
-
 REM Install Node dependencies
 echo Installing Node dependencies...
 npm install >nul 2>&1
