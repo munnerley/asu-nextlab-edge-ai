@@ -6,8 +6,9 @@ echo Clearing port 8888 if in use...
 for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8888') do taskkill /PID %%a /F >nul 2>&1
 
 echo [1/3] Starting Ollama...
+set OLLAMA_HOST=0.0.0.0
 start "" "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
-timeout /t 3 /nobreak >nul
+timeout /t 5 /nobreak >nul
 
 echo [2/3] Starting Open WebUI...
 docker start open-webui 2>nul
