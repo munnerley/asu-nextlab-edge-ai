@@ -7,7 +7,7 @@ for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8888') do taskkill /PID %%a 
 
 echo [1/3] Starting Ollama...
 set OLLAMA_HOST=0.0.0.0
-start "" "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
+start "" /min "%LOCALAPPDATA%\Programs\Ollama\ollama.exe" serve
 timeout /t 5 /nobreak >nul
 
 echo [2/3] Starting Open WebUI...
@@ -21,9 +21,7 @@ if %errorlevel% neq 0 (
 timeout /t 5 /nobreak >nul
 
 echo [3/3] Starting Frontend...
-set SCRIPTDIR=%~dp0
-start "" cmd /k "cd /d %SCRIPTDIR% && serve dist -p 8888"
-timeout /t 2 /nobreak >nul
+start "" cmd /k "serve "%~dp0dist" -l 8888"
 
 echo.
 echo All services running:
