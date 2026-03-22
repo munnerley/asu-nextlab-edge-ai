@@ -1,4 +1,5 @@
 @echo off
+setlocal enabledelayedexpansion
 echo ASU Next Lab Edge AI Demo
 echo ========================================
 
@@ -9,27 +10,24 @@ echo Checking for updates...
 curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o C:\Windows\Temp\ver_check.txt
 set /p REMOTE_VERSION=<C:\Windows\Temp\ver_check.txt
 del C:\Windows\Temp\ver_check.txt >nul 2>&1
-if "%REMOTE_VERSION%"=="" goto :skipupdate
-if "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
+if "%REMOTE_VERSION%"=="" (
+    echo Could not check for updates - running offline.
+) else if "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
     echo You are on the latest version.
-    goto :skipupdate
+) else (
+    echo.
+    echo New version available: v%REMOTE_VERSION%
+    echo.
+    set /p UPDATE="Would you like to update now? (Y/N): "
+    if /i "!UPDATE!"=="Y" (
+        echo Updating...
+        git pull
+        echo Update complete - relaunching...
+        timeout /t 2 /nobreak >nul
+        call start.bat
+        exit
+    )
 )
-echo.
-echo New version available: v%REMOTE_VERSION%
-echo.
-set /p UPDATE="Would you like to update now? (Y/N): "
-if /i "%UPDATE%"=="Y" (
-    echo Updating...
-    git pull
-    echo Update complete - relaunching...
-timeout /t 2 /nobreak >nul
-call start.bat
-exit
-)
-:skipupdate) else (
-    echo You are on the latest version.
-)
-
 
 echo.
 echo ========================================
