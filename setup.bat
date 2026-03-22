@@ -1,4 +1,5 @@
 @echo off
+setlocal
 echo ASU Next Lab Edge AI - First Time Setup
 echo ========================================
 echo.
@@ -13,7 +14,6 @@ if %errorlevel% neq 0 (
 ) else (
     echo [OK] Git already installed
 )
-echo CHECKPOINT 1 - Git done
 
 REM Check Node.js
 node --version >nul 2>&1
@@ -23,7 +23,6 @@ if %errorlevel% neq 0 (
 ) else (
     echo [OK] Node.js already installed
 )
-echo CHECKPOINT 2 - Node done
 
 REM Check Docker Desktop
 docker --version >nul 2>&1
@@ -34,7 +33,6 @@ if %errorlevel% neq 0 (
 ) else (
     echo [OK] Docker already installed
 )
-echo CHECKPOINT 3 - Docker done
 
 REM Check Ollama
 ollama --version >nul 2>&1
@@ -51,7 +49,6 @@ if %errorlevel% neq 0 (
         echo [OK] Ollama already installed
     )
 )
-echo CHECKPOINT 4 - Ollama done
 
 REM Install serve globally
 echo.
@@ -62,13 +59,12 @@ if %errorlevel% neq 0 (
 ) else (
     echo [OK] serve already installed
 )
-echo Press any key to continue setup...
-pause >nul
+echo [OK] serve ready
+
 REM Install Node dependencies
 echo Installing Node dependencies...
 npm install >nul 2>&1
 echo [OK] Node dependencies installed
-echo CHECKPOINT 6 - npm install done
 
 REM Start Docker Desktop
 echo.
@@ -86,7 +82,6 @@ if exist "C:\Program Files\Docker\Docker\Docker Desktop.exe" (
 ) else (
     echo WARNING: Docker Desktop not found - please start it manually before running start.bat
 )
-echo CHECKPOINT 7 - Docker start done
 
 REM Pull AI model
 echo.
@@ -97,7 +92,6 @@ if %errorlevel% neq 0 (
     echo Please restart your computer then run setup.bat again to download the model.
     goto :setupcomplete
 )
-echo CHECKPOINT 8 - Ollama in PATH
 ollama list 2>nul | findstr "qwen2.5:7b" >nul
 if %errorlevel% equ 0 (
     echo [OK] Model already downloaded
@@ -111,7 +105,6 @@ if %errorlevel% equ 0 (
         echo [OK] Model ready
     )
 )
-echo CHECKPOINT 9 - Model done
 
 :setupcomplete
 echo.
