@@ -26,13 +26,14 @@ if %errorlevel% neq 0 (
 timeout /t 5 /nobreak >nul
 
 echo [3/4] Starting Frontend...
-start "" /min cmd /k "serve "%~dp0dist" -l 8888"
+set DEMODIR=%~dp0
+set DEMODIR=%DEMODIR:~0,-1%
+start "" cmd /c "serve "%DEMODIR%\dist" -l 8888"
 timeout /t 2 /nobreak >nul
 
 echo [4/4] Starting Demo Proxy...
-start "" /min cmd /k "cd /d "%~dp0" && node proxy.js"
+start "" cmd /c "node "%DEMODIR%\proxy.js""
 timeout /t 2 /nobreak >nul
-
 echo.
 echo All services running:
 echo   Frontend      ->  http://localhost:8888
