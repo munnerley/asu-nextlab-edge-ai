@@ -56,8 +56,12 @@ echo CHECKPOINT 4 - Ollama done
 REM Install serve globally
 echo.
 echo Installing serve...
-npm install -g serve
-echo [OK] serve installed
+serve --version >nul 2>&1
+if %errorlevel% neq 0 (
+    cmd /c "npm install -g serve"
+) else (
+    echo [OK] serve already installed
+)
 echo CHECKPOINT 5 - serve done
 
 REM Install Node dependencies
