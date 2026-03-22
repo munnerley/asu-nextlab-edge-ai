@@ -9,27 +9,23 @@ echo Checking for updates...
 curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o C:\Windows\Temp\ver_check.txt
 set /p REMOTE_VERSION=<C:\Windows\Temp\ver_check.txt
 del C:\Windows\Temp\ver_check.txt >nul 2>&1
-if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
-    echo.
-    echo New version available: v%REMOTE_VERSION%
-    echo.
-  set /p UPDATE="Would you like to update now? (Y/N): "
-echo You entered: %UPDATE%
-if /i "%UPDATE%"=="Y" goto :doupdate
-if /i "%UPDATE%"=="y" goto :doupdate
-goto :skipupdate
-
-:doupdate
-echo Updating...
-git pull
+if "%REMOTE_VERSION%"=="" goto :skipupdate
+if "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
+    echo You are on the latest version.
+    goto :skipupdate
+)
 echo.
-echo Update complete - restarting...
-pause
-start.bat
-exit
-
-:skipupdate
-) else (
+echo New version available: v%REMOTE_VERSION%
+echo.
+set /p UPDATE="Would you like to update now? (Y/N): "
+if /i "%UPDATE%"=="Y" (
+    echo Updating...
+    git pull
+    echo Update complete - please run start.bat again.
+    pause
+    exit
+)
+:skipupdate) else (
     echo You are on the latest version.
 )
 
