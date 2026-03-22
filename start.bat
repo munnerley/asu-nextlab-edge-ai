@@ -3,36 +3,28 @@ echo ASU Next Lab Edge AI Demo
 echo ========================================
 
 REM Version check
-set LOCAL_VERSION=
-set REMOTE_VERSION=
-
-for /f "usebackq tokens=*" %%a in ("version.txt") do set LOCAL_VERSION=%%a
+for /f "usebackq delims=" %%a in ("version.txt") do set LOCAL_VERSION=%%a
 echo Current version: v%LOCAL_VERSION%
-
 echo Checking for updates...
-curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o "%TEMP%\version_remote.txt"
-timeout /t 1 /nobreak >nul
-if exist "%TEMP%\version_remote.txt" (
-    set /p REMOTE_VERSION=<"%TEMP%\version_remote.txt"
-    del "%TEMP%\version_remote.txt"
-    del "%~dp0version_remote.txt"
-    del version_remote.txt
-    echo DEBUG local=[%LOCAL_VERSION%] remote=[%REMOTE_VERSION%]
+curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o C:\Windows\Temp\ver_check.txt
+set /p REMOTE_VERSION=<C:\Windows\Temp\ver_check.txt
+del C:\Windows\Temp\ver_check.txt >nul 2>&1
+echo DEBUG local=[%LOCAL_VERSION%] remote=[%REMOTE_VERSION%]
 if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
-        echo.
-        echo New version available: v%REMOTE_VERSION%
-        echo.
-        set /p UPDATE="Would you like to update now? (Y/N): "
-        if /i "%UPDATE%"=="Y" (
-            echo Updating...
-            git pull
-            echo Re-run start.bat to launch with the new version.
-            pause
-            exit
-        )
-    ) else (
-        echo You are on the latest version. 
+    echo.
+    echo New version available: v%REMOTE_VERSION%
+    echo.
+    set /p UPDATE="Would you like to update now? (Y/N): "
+    if /i "%UPDATE%"=="Y" (
+        echo Updating...
+        git pull
+        echo Re-run start.bat to launch with the new version.
+        pause
+        exit
     )
+) else (
+    echo You are on the latest version.
+)
 ) else (
     echo Could not check for updates - running offline.
 )
