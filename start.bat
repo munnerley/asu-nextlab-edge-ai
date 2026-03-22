@@ -2,6 +2,11 @@
 echo Starting ASU Next Lab Edge AI Demo...
 echo.
 
+echo [0/4] Starting Docker Desktop...
+start "" "C:\Program Files\Docker\Docker\Docker Desktop.exe"
+echo Waiting for Docker to be ready...
+timeout /t 20 /nobreak >nul
+
 echo Clearing ports if in use...
 for /f "tokens=5" %%a in ('netstat -ano ^| findstr :8888') do taskkill /PID %%a /F >nul 2>&1
 for /f "tokens=5" %%a in ('netstat -ano ^| findstr :3000') do taskkill /PID %%a /F >nul 2>&1
@@ -32,6 +37,7 @@ start "" cmd /c "serve "%DEMODIR%\dist" -l 8888"
 timeout /t 2 /nobreak >nul
 
 echo [4/4] Starting Demo Proxy...
+timeout /t 10 /nobreak >nul
 start "" cmd /c "node "%DEMODIR%\proxy.js""
 timeout /t 2 /nobreak >nul
 echo.
