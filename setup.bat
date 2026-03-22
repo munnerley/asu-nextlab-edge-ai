@@ -62,9 +62,27 @@ echo [OK] Node dependencies installed
 
 REM Pull AI model
 echo.
-echo Pulling AI model (this may take a while)...
+echo Checking AI model...
+ollama list 2>nul | findstr "qwen2.5:7b" >nul
+if %errorlevel% equ 0 (
+    echo [OK] Model already downloaded
+) else (
+    echo Pulling AI model (this may take a while - 4.7GB download)...
+    ollama pull qwen2.5:7b
+    if %errorlevel% neq 0 (
+        echo WARNING: Model download failed.
+        echo Please run 'ollama pull qwen2.5:7b' manually after setup.
+    ) else (
+        echo [OK] Model ready
+    )
+)
 ollama pull qwen2.5:7b
-echo [OK] Model ready
+if %errorlevel% neq 0 (
+    echo WARNING: Model download failed. 
+    echo Please run 'ollama pull qwen2.5:7b' manually after setup.
+) else (
+    echo [OK] Model ready
+)
 
 echo.
 echo ========================================
