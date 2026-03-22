@@ -8,37 +8,30 @@ A self-contained local AI demo kit running entirely offline.
 - Ollama (local AI models)
 - Auto-login proxy for seamless demo experience
 
-## Prerequisites — install these once
-
-1. [Git](https://git-scm.com/download/win)
-2. [Node.js LTS](https://nodejs.org)
-3. [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-4. [Ollama](https://ollama.com/download)
-
 ## First-time setup
 
-Open a terminal and run:
+1. Install Git from https://git-scm.com/download/win
+
+2. Open a terminal and clone the repo:
 ```bash
-git clone https://github.com/munnerley/asu-nextlab-edge-ai
-cd asu-nextlab-edge-ai
-npm install -g serve
-npm install
+   git clone https://github.com/munnerley/asu-nextlab-edge-ai
+   cd asu-nextlab-edge-ai
 ```
 
-Pull an AI model (one time):
-```bash
-ollama pull qwen2.5:7b
-```
+3. Double-click `setup.bat` — this will automatically install:
+   - Node.js
+   - Docker Desktop
+   - Ollama
+   - All dependencies
+   - The AI model (qwen2.5:7b)
 
-Start everything:
-```bash
-cmd /c start.bat
-```
+4. If prompted to restart your computer, do so, then come back and continue.
+
+5. Double-click `start.bat`
 
 ## Every subsequent use
-```bash
-cmd /c start.bat
-```
+
+Double-click `start.bat`
 
 ## Services
 
@@ -62,23 +55,16 @@ Use the Admin WebUI at http://localhost:3001 to:
 Any changes made in Admin WebUI are instantly reflected in the Demo WebUI.
 
 ## Getting updates
-```bash
-cmd /c update.bat
-```
 
-Then restart with `cmd /c start.bat`.
+Double-click `update.bat`, then `start.bat`.
 
 ## Pushing config updates (Next Lab staff only)
 
-After making changes in Admin WebUI, run:
-```bash
-export-config.bat
-```
+After making changes in Admin WebUI, double-click `export-config.bat`.
 
 This exports the Open WebUI config and pushes it to GitHub.
 Recipients run `update.bat` to get the latest.
 
 ## Shutting down
-```bash
-cmd /c stop.bat
-```
+
+Double-click `stop.bat`
