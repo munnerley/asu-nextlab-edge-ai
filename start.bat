@@ -9,7 +9,6 @@ echo Checking for updates...
 curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o C:\Windows\Temp\ver_check.txt
 set /p REMOTE_VERSION=<C:\Windows\Temp\ver_check.txt
 del C:\Windows\Temp\ver_check.txt >nul 2>&1
-echo DEBUG local=[%LOCAL_VERSION%] remote=[%REMOTE_VERSION%]
 if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
     echo.
     echo New version available: v%REMOTE_VERSION%
@@ -25,9 +24,7 @@ if not "%LOCAL_VERSION%"=="%REMOTE_VERSION%" (
 ) else (
     echo You are on the latest version.
 )
-) else (
-    echo Could not check for updates - running offline.
-)
+
 
 echo.
 echo ========================================
