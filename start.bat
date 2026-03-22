@@ -10,7 +10,7 @@ for /f "tokens=*" %%a in (version.txt) do set LOCAL_VERSION=%%a
 echo Current version: v%LOCAL_VERSION%
 
 echo Checking for updates...
-curl -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o version_remote.txt 2>nul
+curl.exe -s https://raw.githubusercontent.com/munnerley/asu-nextlab-edge-ai/main/version.txt -o version_remote.txt 2>nul
 if exist version_remote.txt (
     for /f "tokens=*" %%a in (version_remote.txt) do set REMOTE_VERSION=%%a
     del version_remote.txt
