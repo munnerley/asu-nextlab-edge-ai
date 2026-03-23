@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Translate to Spanish",
+    "content": "Translate the following to Spanish: Welcome to ASU Next Lab, where we explore the future of AI in education."
+  },
+  {
+    "title": "Translate to French",
+    "content": "Translate the following to French: Artificial intelligence is changing how we learn and teach."
+  },
+  {
+    "title": "Translate to Swahili",
+    "content": "Translate the following to Swahili: Education is the most powerful tool we can use to change the world."
+  },
+  {
+    "title": "Translate to Arabic",
+    "content": "Translate the following to Arabic: How can I help you today?"
+  },
+  {
+    "title": "Translate to Chinese",
+    "content": "Translate the following to Mandarin Chinese (simplified): This AI runs completely offline with no internet required."
+  },
+  {
+    "title": "Translate to Hindi",
+    "content": "Translate the following to Hindi: What languages do you support?"
+  },
+  {
+    "title": "What languages do you support?",
+    "content": "What languages can you translate to and from?"
+  },
+  {
+    "title": "Translate to Portuguese",
+    "content": "Translate the following to Brazilian Portuguese: Local AI models protect your privacy because no data leaves your device."
+  }
+]
