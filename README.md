@@ -19,14 +19,18 @@ A self-contained local AI demo kit running entirely offline.
    cd asu-nextlab-edge-ai
 ```
 
-3. Double-click `setup.bat` — this will automatically install:
+3. Run setup:
+```cmd
+   cmd /k setup.bat
+```
+   This will automatically install:
    - Node.js
    - Docker Desktop
    - Ollama
    - All dependencies
    - The AI model (qwen2.5:7b)
 
-4. If prompted to restart your computer, do so, then come back and continue.
+4. If prompted to restart your computer, do so, then come back and run setup.bat again.
 
 5. Double-click `start.bat`
 
@@ -43,6 +47,13 @@ On startup it will automatically check for updates and prompt you if a new versi
 | Frontend      | http://localhost:8888  | No login required               |
 | Demo WebUI    | http://localhost:3000  | Auto-login as demouser          |
 | Admin WebUI   | http://localhost:3001  | Admin login required            |
+
+## Available demos
+
+| Demo | Description |
+|------|-------------|
+| ASU Student Wellbeing | Mental health support companion for ASU students |
+| Syllabot | Upload your syllabus and ask questions about your course |
 
 ## Admin access
 
@@ -61,29 +72,34 @@ Any changes made in Admin WebUI are instantly reflected in the Demo WebUI.
 
 Double-click `start.bat` — it checks for updates automatically on every launch.
 
-Or manually pull latest:
-```bash
-git pull
-```
-
 ## Releasing updates (Next Lab staff only)
 
-After making changes in Admin WebUI or the frontend:
+After making changes in Admin WebUI or the Lovable frontend:
 
 1. Double-click `export-config.bat`
 2. Enter the new version number when prompted
-3. Wait 2-3 minutes for GitHub cache to clear before testing
 
+This will automatically:
+- Pull latest Lovable source and rebuild frontend
+- Export Open WebUI config
+- Bump version number
+- Push everything to GitHub and tag the release
+
+Wait 2-3 minutes for GitHub cache to clear before testing.
 Recipients will be prompted to update on their next `start.bat` launch.
 
 ## Shutting down
 
 Double-click `stop.bat`
 
+## Version history
+
 | Version | Notes |
 |---------|-------|
-| v1.0.4  | Improved setup - Docker autostart, Ollama path detection |
-| v1.0.3  | Version management, export-config with version bump |
+| v1.0.6  | One-click export, Syllabot demo added |
+| v1.0.5  | Improved setup.bat - Docker autostart, Ollama detection |
+| v1.0.4  | Fix setup for different install locations |
+| v1.0.3  | Version management, one-click export-config |
 | v1.0.2  | Version checking, auto-update on startup |
 | v1.0.1  | Admin portal, auto-login proxy |
 | v1.0.0  | Initial release |
