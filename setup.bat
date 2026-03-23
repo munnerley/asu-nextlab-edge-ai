@@ -92,20 +92,35 @@ if %errorlevel% neq 0 (
     echo Please restart your computer then run setup.bat again to download the model.
     goto :setupcomplete
 )
+echo Checking qwen2.5:7b...
 ollama list 2>nul | findstr "qwen2.5:7b" >nul
 if %errorlevel% equ 0 (
-    echo [OK] Model already downloaded
+    echo [OK] qwen2.5:7b already downloaded
 ) else (
-    echo Pulling AI model (this may take a while - 4.7GB download^)...
+    echo Pulling qwen2.5:7b (4.7GB - this may take a while^)...
     ollama pull qwen2.5:7b
     if %errorlevel% neq 0 (
-        echo WARNING: Model download failed.
+        echo WARNING: qwen2.5:7b download failed.
         echo Please run 'ollama pull qwen2.5:7b' manually after setup.
     ) else (
-        echo [OK] Model ready
+        echo [OK] qwen2.5:7b ready
     )
 )
 
+echo Checking translategemma...
+ollama list 2>nul | findstr "translategemma" >nul
+if %errorlevel% equ 0 (
+    echo [OK] translategemma already downloaded
+) else (
+    echo Pulling translategemma (3.3GB - this may take a while^)...
+    ollama pull translategemma
+    if %errorlevel% neq 0 (
+        echo WARNING: translategemma download failed.
+        echo Please run 'ollama pull translategemma' manually after setup.
+    ) else (
+        echo [OK] translategemma ready
+    )
+)
 :setupcomplete
 echo.
 echo ========================================
