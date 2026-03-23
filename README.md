@@ -28,7 +28,7 @@ A self-contained local AI demo kit running entirely offline.
    - Docker Desktop
    - Ollama
    - All dependencies
-   - The AI model (qwen2.5:7b)
+   - AI models: qwen2.5:7b and translategemma
 
 4. If prompted to restart your computer, do so, then come back and run setup.bat again.
 
@@ -50,10 +50,20 @@ On startup it will automatically check for updates and prompt you if a new versi
 
 ## Available demos
 
-| Demo | Description |
-|------|-------------|
-| ASU Student Wellbeing | Mental health support companion for ASU students |
-| Syllabot | Upload your syllabus and ask questions about your course |
+| Demo | Model | Description |
+|------|-------|-------------|
+| ASU Student Wellbeing | qwen2.5:7b | Mental health support companion for ASU students |
+| Syllabot | qwen2.5:7b | Upload your syllabus and ask questions about your course |
+| Language Translator | translategemma | Translate text across 55 languages, no internet required |
+
+## Updating Ollama models
+
+To pull the latest versions of all AI models:
+```cmd
+update-models.bat
+```
+
+This pulls `qwen2.5:7b` and `translategemma`. Run this after a fresh install or when new models are added.
 
 ## Admin access
 
@@ -71,6 +81,11 @@ Any changes made in Admin WebUI are instantly reflected in the Demo WebUI.
 ## Getting updates
 
 Double-click `start.bat` — it checks for updates automatically on every launch.
+
+Or to update Ollama models separately:
+```cmd
+update-models.bat
+```
 
 ## Releasing updates (Next Lab staff only)
 
@@ -96,6 +111,8 @@ Double-click `stop.bat`
 
 | Version | Notes |
 |---------|-------|
+| v1.0.8  | Language Translator demo, translategemma model |
+| v1.0.7  | update-models.bat, translategemma added to setup |
 | v1.0.6  | One-click export, Syllabot demo added |
 | v1.0.5  | Improved setup.bat - Docker autostart, Ollama detection |
 | v1.0.4  | Fix setup for different install locations |
