@@ -1,0 +1,34 @@
+[
+  {
+    "title": "Course Objectives",
+    "content": "What are the main learning objectives for this course?"
+  },
+  {
+    "title": "Assignment Deadlines",
+    "content": "What are all the assignment deadlines and due dates in this course?"
+  },
+  {
+    "title": "Grading Breakdown",
+    "content": "How is my grade calculated? What percentage is each assignment, exam, or project worth?"
+  },
+  {
+    "title": "Required Textbooks",
+    "content": "What textbooks or materials do I need to buy or access for this course?"
+  },
+  {
+    "title": "Attendance Policy",
+    "content": "What is the attendance policy? How many absences am I allowed?"
+  },
+  {
+    "title": "Exam Schedule",
+    "content": "When are the midterms and final exams scheduled?"
+  },
+  {
+    "title": "Late Work Policy",
+    "content": "What happens if I submit an assignment late? Is there a penalty?"
+  },
+  {
+    "title": "Contact the Professor",
+    "content": "How do I contact the professor? What are their office hours?"
+  }
+]
